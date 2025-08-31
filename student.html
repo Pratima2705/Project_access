@@ -3,9 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Page</title>
+    <title>Student Login</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="student.css">
 </head>
 <body>
-    <h1 style="text-align:center;">Student Login</h1>
+    <h1 class="title">Student Login</h1>
+    <div class="form-container">
+        <form onsubmit="handleStudentLogin(event)">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="members">Number of Members in Team *</label>
+            <input type="number" id="members" name="members" required min="1">
+            
+            <label for="name">Guide Name *</label>
+            <input type="text" id="guide" name="guide" required>
+
+            <label for="project">Project Title *</label>
+            <input type="text" id="project" name="project" required>
+
+            <label for="domain">Domain of Project *</label>
+            <input type="text" id="domain" name="domain" required>
+
+            <div class="btn-container">
+                <button type="submit" class="btn-blue">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleStudentLogin(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const members = document.getElementById('members').value;
+            const project = document.getElementById('project').value.trim();
+            const domain = document.getElementById('domain').value.trim();
+
+            if (!name) {
+                alert('Please enter your name.');
+                return;
+            }
+            if (!members || members < 1) {
+                alert('Number of members must be at least 1.');
+                return;
+            }
+            if (!project) {
+                alert('Please enter the project title.');
+                return;
+            }
+            if (!domain) {
+                alert('Please enter the project domain.');
+                return;
+            }
+
+            // Success message
+           alert(`Welcome ${name}!\nProject: ${project}\nDomain: ${domain}\nTeam Members: ${members}`);
+        }
+    </script>
 </body>
 </html>
