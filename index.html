@@ -2,56 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectAccess</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1 style="text-align:center;">DevOps project</h1>
-    <div style="max-width:400px;margin:40px auto;padding:30px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);background:#f9f9f9;">
+    <h1 class="title">ProjectAccess</h1>
+    <div class="form-container">
         <form onsubmit="handleLogin(event)">
-            <label for="username" style="display:block;margin-bottom:8px;font-weight:bold;">Username *</label>
-            <input type="text" id="username" name="username" required style="width:100%;padding:8px;margin-bottom:16px;border:1px solid #ccc;border-radius:4px;">
-            <label for="email" style="display:block;margin-bottom:8px;font-weight:bold;">Email *</label>
-            <input type="email" id="email" name="email" required style="width:100%;padding:8px;margin-bottom:16px;border:1px solid #ccc;border-radius:4px;">
-            
-            <label for="role" style="display:block;margin-bottom:8px;font-weight:bold;">Select Role</label>
-            <select id="role" name="role" required style="width:100%;padding:8px;margin-bottom:24px;border:1px solid #ccc;border-radius:4px;">
+            <label for="username">Username *</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="role">Select Role</label>
+            <select id="role" name="role" required>
                 <option value="">-- Select Role --</option>
                 <option value="student">Student</option>
                 <option value="faculty">Faculty</option>
             </select>
-            
-            <div style="text-align:center;">
-                <button type="submit" style="width:40%;padding:10px;background-color:#28a745;color:white;border:none;border-radius:4px;font-size:16px;cursor:pointer;">Login</button>
+
+            <div class="btn-container">
+                <button type="submit">Login</button>
             </div>
         </form>
+        
+        <div style="text-align:center;margin-top:20px;">
+            <a href="data-viewer.html" style="color:#007bff;text-decoration:none;font-size:14px;">📊 View Stored Data</a>
+        </div>
     </div>
 
     <script>
         function handleLogin(event) {
-            event.preventDefault(); // Prevent default form submission
-            
+            event.preventDefault();
+
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const role = document.getElementById('role').value;
-            
-            // Check specific fields and show appropriate alerts
+
             if (!username) {
                 alert('Please enter a username.');
                 return;
             }
-            
             if (!email) {
                 alert('Please enter an email address.');
                 return;
             }
-            
             if (!role) {
                 alert('Please select a role.');
                 return;
             }
-            
-            // If all fields are filled, redirect based on selected role
+
             if (role === 'student') {
                 window.location.href = 'student.html';
             } else if (role === 'faculty') {
