@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Login</title>
+    <link rel="stylesheet" href="faculty.css">
 </head>
 <body>
-    <h1 style="text-align:center;">Faculty Login</h1>
-    <div style="max-width:400px;margin:40px auto;padding:30px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);background:#f9f9f9;">
+    <h1 class="title">Faculty Login</h1>
+    <div class="form-container">
         <form onsubmit="handleFacultyLogin(event)">
-            <label for="name" style="display:block;margin-bottom:8px;font-weight:bold;">Name *</label>
-            <input type="text" id="name" name="name" required style="width:100%;padding:8px;margin-bottom:16px;border:1px solid #ccc;border-radius:4px;">
-            
-            <label for="teams" style="display:block;margin-bottom:8px;font-weight:bold;">Number of Teams *</label>
-            <input type="number" id="teams" name="teams" required min="1" style="width:100%;padding:8px;margin-bottom:24px;border:1px solid #ccc;border-radius:4px;">
-            
-            <div style="text-align:center;">
-                <button type="submit" style="width:40%;padding:10px;background-color:#007bff;color:white;border:none;border-radius:4px;font-size:16px;cursor:pointer;">Submit</button>
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="teams">Number of Teams *</label>
+            <input type="number" id="teams" name="teams" required min="1">
+
+            <div class="btn-container">
+                <button type="submit" class="btn-blue">Submit</button>
             </div>
         </form>
     </div>
@@ -27,26 +28,36 @@
             
             const name = document.getElementById('name').value;
             const teams = document.getElementById('teams').value;
-                        if (!name) {
+
+            if (!name) {
                 alert('Please enter your name.');
                 return;
             }
-            
             if (!teams) {
                 alert('Please enter the number of teams.');
                 return;
             }
-            
             if (teams < 1) {
                 alert('Number of teams must be at least 1.');
                 return;
             }
+
+            const facultyData = {
+                name: name,
+                teams: teams,
+                timestamp: new Date().toISOString(),
+                type: 'faculty'
+            };
+            let storedFacultyData = JSON.parse(localStorage.getItem('facultyData')) || [];
             
-            // If all fields are valid, show success message
-            alert(`Welcome ${name}! You have ${teams} team(s) assigned.`);
+            storedFacultyData.push(facultyData);
             
-            // You can add redirection or further processing here
-            // window.location.href = 'faculty-dashboard.html';
+            localStorage.setItem('facultyData', JSON.stringify(storedFacultyData));
+
+            alert(`Faculty data saved successfully!\nWelcome ${name}! You have ${teams} team(s) assigned.`);
+            
+            document.getElementById('name').value = '';
+            document.getElementById('teams').value = '';
         }
     </script>
 </body>
